@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import ElectionList from './components/ElectionList';
+import Candidates from './components/Candidates';
+import Results from './components/Results';
+import AdminPanel from './components/AdminPanel';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [token, setToken] = useState('');
+    const [electionId, setElectionId] = useState(null);
+
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={!token ? <Navigate to="/login" /> : <ElectionList token={token} selectElection={setElectionId} />} />
+                <Route path="/login" element={<Login setToken={setToken} />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/elections" element={token ? <ElectionList token={token} selectElection={setElectionId} /> : <Navigate to="/login" />} />
+                <Route path="/candidates" element={token && electionId ? <Candidates token={token} electionId={electionId} /> : <Navigate to="/login" />} />
+                <Route path="/results" element={token && electionId ? <Results token={token} electionId={electionId} /> : <Navigate to="/login" />} />
+                <Route path="/admin" element={token ? <AdminPanel token={token} /> : <Navigate to="/login" />} />
+            </Routes>
+        </Router>
+    );
+};
+
 
 export default App;

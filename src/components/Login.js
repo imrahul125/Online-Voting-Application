@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import './css/Login.css';
 const Login = ({ setToken }) => {
     const [voterId, setVoterId] = useState('');
     const [password, setPassword] = useState('');

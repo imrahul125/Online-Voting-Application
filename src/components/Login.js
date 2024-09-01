@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import './css/Login.css';
+import "./css/Login.css"
+
 const Login = ({ setToken }) => {
     const [voterId, setVoterId] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Clear the voterId field on component mount
+        setVoterId('');
+    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,12 +33,14 @@ const Login = ({ setToken }) => {
                     placeholder="Voter ID"
                     value={voterId}
                     onChange={(e) => setVoterId(e.target.value)}
+                    autoComplete="off"
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="off"
                 />
                 <button type="submit">Login</button>
             </form>

@@ -16,11 +16,11 @@ const App = () => {
             <Routes>
                 <Route path="/" element={!token ? <Navigate to="/login" /> : <ElectionList token={token} selectElection={setElectionId} />} />
                 <Route path="/login" element={<Login setToken={setToken} />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register />} />   
                 <Route path="/elections" element={token ? <ElectionList token={token} selectElection={setElectionId} /> : <Navigate to="/login" />} />
                 <Route path="/candidates" element={token && electionId ? <Candidates token={token} electionId={electionId} /> : <Navigate to="/login" />} />
                 <Route path="/results" element={token && electionId ? <Results token={token} electionId={electionId} /> : <Navigate to="/login" />} />
-                <Route path="/admin" element={token ? <AdminPanel token={token} /> : <Navigate to="/login" />} />
+                <Route path="/adminpanel" element={<AdminPanel />} />
             </Routes>
         </Router>
     );

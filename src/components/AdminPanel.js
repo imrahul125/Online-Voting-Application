@@ -44,6 +44,8 @@ const AdminPanel = ({ token }) => {
                 <button type="submit">Create Election</button>
             </form>
 
+            <h1> This is admin Panel</h1>
+
             <h2>Add Candidate</h2>
             <form onSubmit={addCandidate}>
                 <input type="text" name="name" placeholder="Name" value={candidateData.name} onChange={(e) => handleChange(e, setCandidateData)} />
